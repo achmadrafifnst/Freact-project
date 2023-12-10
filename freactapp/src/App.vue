@@ -184,6 +184,15 @@
                 <v-col cols="12" md="3">
                   <v-file-input class="hidden" ref="fileInput" v-model="selectedImage" accept=".png, .jpg, .jpeg" @change="onImageChange"></v-file-input>
                 </v-col>
+                <v-col cols="12" md="9"> </v-col>
+                <v-col cols="12" md="12" class="d-flex align-center justify-center">
+                  <v-progress-circular
+                    v-if="isPredict"
+                    indeterminate
+                    color="primary"
+                  ></v-progress-circular>
+                </v-col>
+                <v-col cols="12" md="3"> </v-col>
                 <v-col cols="12" md="3">
                   <v-btn @click="onClickInput" style="background-color: rgb(15, 15, 136); color: white;">Input</v-btn>
                 </v-col>
@@ -223,6 +232,7 @@ export default {
       prediksi:'',
       probabilitas:'',
       isInput:false,
+      isPredict:false,
       selectedImage: null,
       url:null
   }),
@@ -243,12 +253,14 @@ export default {
     },
     onClickPredict(){
       this.isInput = false
+      this.isPredict = true
       let formData = new FormData()
       formData.append("selectedImage",this.selectedImage)
       axios.post('https://freact-app.onrender.com/api/freact',formData).then(
         response => {
           this.prediksi = response.data.Prediksi
           this.probabilitas = response.data.Probabilitas
+          this.isPredict = false
           // console.log(response.data)
         }
       )
@@ -338,53 +350,3 @@ export default {
 }
 
 </style>
-
-<!-- <style scoped>
-/* #home{
-  background: url('./assets/latar2.jpg') center center;
-  height: 100vh;
-}
-.search{
-  transition-timing-function: 0.5s;
-  transition-delay: 0.5s;
-  transition-duration: 0.5s;
-}
-.search:hover{
-  -webkit-transform: scaleX(-1);
-  transform:scaleX(-1);
-}
-#about{
-  background-color : rgb(0, 65, 130);
-  background-image: linear-gradient(to top,rgb(0, 65, 130),grey);
-  height: 100vh;
-}
-#batas{
-  background-color:white;
-  padding-top: 0.5px;
-  padding-bottom: 0.5px;
-  width:100%;
-  text-align: center;
-}
-#batas p{
-  color:rgb(197, 128, 43);
-  font-size: 15pt;
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  word-spacing:8px;
-  letter-spacing: 8px;
-}
-#faq{
-  background-color : rgb(0, 65, 130);
-  background-image: linear-gradient(to bottom,rgb(0, 65, 130),grey);
-  height:100vh;
-}
-@media screen and (max-width:600px) {
-  #app-name{
-    font-size: 200%;
-  }
-  #batas p{
-    font-size: 10pt;
-    word-spacing: 3px;
-    letter-spacing: 3px;
-  }
-} */
-</style> -->
