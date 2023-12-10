@@ -256,7 +256,7 @@ export default {
       this.isPredict = true
       let formData = new FormData()
       formData.append("selectedImage",this.selectedImage)
-      axios.post('https://freact-app.onrender.com/api/freact',formData).then(
+      axios.post('https://freact-app.onrender.com/api/rafif/freact',formData).then(
         response => {
           this.prediksi = response.data.Prediksi
           this.probabilitas = response.data.Probabilitas

@@ -10,7 +10,7 @@ CORS(app)
 app.secret_key = "projekakhir"
 app.config['UPLOAD_FOLDER'] = 'static/img_check/'
 
-@app.route("/api/freact",methods = ['POST'])
+@app.route("/api/rafif/freact",methods = ['POST'])
 def start():
     file = request.files
     if file:
