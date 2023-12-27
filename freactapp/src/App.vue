@@ -6,6 +6,7 @@
       dark
       class="px-2"
       fixed
+      id="app-container"
     >
       <div class="d-flex align-center">
         <!-- <v-img
@@ -348,5 +349,8 @@ export default {
     letter-spacing: 3px;
   }
 }
-
+#app-container{
+  overflow-x: hidden;
+  overflow-y:hidden;
+}
 </style>
