@@ -1,12 +1,11 @@
 <template>
-  <v-app elevate-on-scroll>
+  <v-app elevate-on-scroll  class="app">
     <v-app-bar
       app
       color="#18348B"
       dark
       class="px-2"
       fixed
-      id="app-container"
     >
       <div class="d-flex align-center">
         <!-- <v-img
@@ -349,7 +348,7 @@ export default {
     letter-spacing: 3px;
   }
 }
-#app-container{
+.app{
   overflow-x: hidden;
   overflow-y:hidden;
 }
