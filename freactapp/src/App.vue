@@ -186,11 +186,15 @@
                 </v-col>
                 <v-col cols="12" md="9"> </v-col>
                 <v-col cols="12" md="12" class="d-flex align-center justify-center">
-                  <v-progress-circular
-                    v-if="isPredict"
-                    indeterminate
-                    color="primary"
-                  ></v-progress-circular>
+                  <div v-if="isPredict">
+                    <h5 v-if="showText">
+                      Percobaan pertama membutuhkan waktu hampir 1 menit
+                    </h5>
+                    <v-progress-circular
+                      indeterminate
+                      color="primary"
+                    ></v-progress-circular>
+                  </div>
                 </v-col>
                 <v-col cols="12" md="3"> </v-col>
                 <v-col cols="12" md="3">
@@ -233,6 +237,8 @@ export default {
       probabilitas:'',
       isInput:false,
       isPredict:false,
+      showText:false,
+      timeoutId: null,
       selectedImage: null,
       url:null
   }),
@@ -254,6 +260,11 @@ export default {
     onClickPredict(){
       this.isInput = false
       this.isPredict = true
+      this.timeoutId = setTimeout(() => {
+        if (this.isPredict) {
+          this.showText = true;
+        }
+      }, 5000)
       let formData = new FormData()
       formData.append("selectedImage",this.selectedImage)
       axios.post('https://freact-app.onrender.com/api/rafif/freact',formData).then(
@@ -261,7 +272,8 @@ export default {
           this.prediksi = response.data.Prediksi
           this.probabilitas = response.data.Probabilitas
           this.isPredict = false
-          // console.log(response.data)
+          this.showText = false
+          clearTimeout(this.timeoutId)
         }
       )
     },
