@@ -205,7 +205,6 @@
                   <v-btn @click="onClickPredict" style="background-color: rgb(15, 15, 136); color: white;">Predict</v-btn>
                 </v-col>
                 <v-col cols="12" md="3"> </v-col>
-                
               </v-row>
             </v-col>
             <v-col cols="12" md="1"> </v-col>
